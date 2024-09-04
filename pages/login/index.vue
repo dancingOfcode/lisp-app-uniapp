@@ -96,10 +96,9 @@
 	}
 
 	.label-item {
-		position: relative;
 		padding-bottom: 12px;
 
-		>uni-view:first-child {
+		.no-label {
 			position: absolute !important;
 		}
 	}
