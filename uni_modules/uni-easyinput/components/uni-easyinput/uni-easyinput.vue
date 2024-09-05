@@ -18,7 +18,7 @@
 				<!-- 开启密码时显示小眼睛 -->
 				<uni-icons v-if="isVal" class="content-clear-icon" :class="{'is-textarea-icon':type==='textarea'}"
 					:type="showPassword?'eye-slash-filled':'eye-filled'" :size="22"
-					:color="focusShow?'#2979ff':'#c0c4cc'" @click="onEyes">
+					:color="focusShow?'#42464e':'#c0c4cc'" @click="onEyes">
 				</uni-icons>
 			</template>
 			<template v-else-if="suffixIcon">
@@ -243,7 +243,7 @@
 				})
 			},
 			inputContentStyle() {
-				const focusColor = this.focusShow ? '#2979ff' : this.styles.borderColor
+				const focusColor = this.focusShow ? (this.styles.focusColor ? this.styles.focusColor : '#93989e') : this.styles.borderColor
 				const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor
 				return obj2strStyle({
 					'border-color': borderColor || '#e5e5e5',

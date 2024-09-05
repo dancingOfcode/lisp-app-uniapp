@@ -18,9 +18,17 @@
 	@import '@/uni_modules/uni-scss/index.scss';
 	/* #ifndef APP-NVUE */
 	@import '@/static/customicons.css';
+	// 公共样式
+	@import '@/common/css/common.css';
+
+	#app {
+		overflow: hidden;
+	}
 
 	// 设置整个项目的背景色
 	page {
+		font-size: 12px;
+		color: #2c3136;
 		background-color: #f5f5f5;
 	}
 

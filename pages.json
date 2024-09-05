@@ -10,12 +10,78 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/emptyVehicle/index",
+			"style": {
+				"navigationBarTitleText": "叫空载具" // 标题
+			}
+		},
+		{
+			"path": "pages/platformControl/index",
+			"style": {
+				"navigationBarTitleText": "站台控制" // 标题
+			}
+		},
+		{
+			"path": "pages/containerPickup/index",
+			"style": {
+				"navigationBarTitleText": "料箱取货" // 标题
+			}
+		},
+		{
+			"path": "pages/transferWarehouse/index",
+			"style": {
+				"navigationBarTitleText": "中转回库" // 标题
+			}
+		},
+		{
+			"path": "pages/transportMaterials/index",
+			"style": {
+				"navigationBarTitleText": "物料搬送" // 标题
+			}
+		},
+		{
+			"path": "pages/addVehicle/index",
+			"style": {
+				"navigationBarTitleText": "新增载具" // 标题
+			}
+		},
+		{
+			"path": "pages/taskControl/index",
+			"style": {
+				"navigationBarTitleText": "任务控制" // 标题
+			}
+		},
+		{
+			"path": "pages/unbind/index",
+			"style": {
+				"navigationBarTitleText": "解除绑定" // 标题
+			}
+		},
+		{
+			"path": "pages/userInfo/index",
+			"style": {
+				"navigationBarTitleText": "个人信息" // 标题
+			}
+		},
+		{
+			"path": "pages/userInfo/updatePassword/index",
+			"style": {
+				"navigationBarTitleText": "修改密码" // 标题
+			}
+		},
+		{
+			"path": "pages/appInfo/index",
+			"style": {
+				"navigationBarTitleText": "关于APP" // 标题
+			}
 		}
 	],
 	"globalStyle": {
+		"backgroundColor": "#F8F8F8",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTitleText": "郑州车灯",
+		"navigationBarBackgroundColor": "#99ccfa"
 	}
 }

@@ -1,24 +1,29 @@
 <template>
-	<view class="login-container">
+	<view class="login-container pt-42">
 		<view class="status_bar">
 			<!-- 这里是状态栏 -->
 		</view>
 		<view class="login-form">
-			<uni-forms ref="loginForm" :rules="rules" :model="loginFormData" label-position="top">
-				<uni-forms-item class="label-item" label="" name="account">
-					<uni-easyinput class="label-form" v-model="loginFormData.account" placeholder="账号"
+			<view class="header mb-16">
+				<image class="logo" src="/static/image/logo.jpg"></image>
+				<view class="fz-26">弗迪电池</view>
+				<view>FinDreams Battery</view>
+			</view>
+			<uni-forms ref="loginForm" :rules="rules" :model="loginFormData">
+				<uni-forms-item class="pb-12" label="" name="account">
+					<uni-easyinput v-model="loginFormData.account" :clearable="false" placeholder="账号"
 						prefixIcon="person" />
 				</uni-forms-item>
-				<uni-forms-item class="label-item" label="" name="password">
-					<uni-easyinput class="label-form" v-model="loginFormData.password" placeholder="密码"
+				<uni-forms-item class="pb-12" label="" name="password">
+					<uni-easyinput type="password" iconColor="red" v-model="loginFormData.password" placeholder="密码"
 						prefixIcon="locked" />
 				</uni-forms-item>
-				<uni-forms-item class="label-item" label="" name="remember">
-					<uni-data-checkbox class="label-form" v-model="loginFormData.remember" multiple
-						:localdata="rememberText" />
+				<uni-forms-item class="pb-12" label="" name="remember">
+					<uni-data-checkbox v-model="loginFormData.remember" multiple :localdata="rememberText"
+						selectedColor="#2b638b" selectedTextColor="#595e64" />
 				</uni-forms-item>
 			</uni-forms>
-			<button class="submit-btn" type="primary" @click="submit">登录</button>
+			<button class="sbumit-btn" type="primary" @click="submit">登录</button>
 		</view>
 	</view>
 </template>
@@ -61,7 +66,7 @@
 		loginForm.value.validate().then(res => {
 			console.log('success', res);
 			uni.showToast({
-				title: `校验通过`
+				title: `登录成功！`
 			})
 			//在起始页面跳转到test.vue页面并传递参数
 			uni.navigateTo({
@@ -77,6 +82,7 @@
 	.login-container {
 		width: 100vw;
 		height: 100vh;
+		overflow: hidden;
 
 		.status_bar {
 			height: var(--status-bar-height);
@@ -86,20 +92,29 @@
 		.login-form {
 			padding: 12px;
 			display: flex;
+			overflow: hidden;
 			flex-direction: column;
 			height: calc(100% - var(--status-bar-height));
-		}
 
-		.submit-btn {
-			width: 100%;
-		}
-	}
+			.header {
+				width: 100%;
+				display: flex;
+				color: #292e33;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 
-	.label-item {
-		padding-bottom: 12px;
+				.logo {
+					width: 100px;
+					height: 100px;
+				}
+			}
 
-		.no-label {
-			position: absolute !important;
+			.sbumit-btn {
+				width: 100%;
+				color: #417297;
+				background: #99cbf9;
+			}
 		}
 	}
 </style>

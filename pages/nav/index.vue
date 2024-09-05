@@ -1,25 +1,26 @@
 <template>
 	<view class="nav-container">
-		<uni-nav-bar class="custom-bar" shadow left-icon="bars" title="郑州车灯" @clickLeft="showDrawer" />
-		<view class="section">
-			<view class="section-item" v-for="item in navData">
-				<image class="icon" :src="item.icon"></image>
+		<uni-nav-bar class="custom-bar" shadow left-icon="bars" title="郑州车灯" backgroundColor="#99ccfa"
+			@clickLeft="showDrawer" />
+		<view class="section pd-12">
+			<view class="section-item mr-12 mb-12 pd-12" v-for="item in navData" @click="navClick(item.url)">
+				<image class="icon mb-12" :src="item.icon"></image>
 				<view>{{item.title}}</view>
 			</view>
 		</view>
 	</view>
-	<uni-drawer ref="showLeft" mode="left" :width="320">
+	<uni-drawer ref="showLeft" mode="left" :width="300">
 		<view class="drawer-content">
-			<view class="header">
+			<view class="drawer-header pd-16">
 				<image class="logo" src="/static/image/logo.jpg"></image>
-				<view>超级管理员</view>
-				<view>7857950</view>
+				<view class="mt-12 mb-8 fz-16">超级管理员</view>
+				<view class="fz-14">7857950</view>
 			</view>
-			<view class="section">
-				<view>个人信息</view>
-				<view>关于APP</view>
+			<view class="drawer-section pd-16">
+				<view class="fz-18 mb-16" @click="navClick('/pages/userInfo/index')">个人信息</view>
+				<view class="fz-18"  @click="navClick('/pages/appInfo/index')">关于APP</view>
 			</view>
-			<button class="footer">退出登录</button>
+			<button class="quit-btn" @click="quitLogin">退出登录</button>
 		</view>
 	</uni-drawer>
 </template>
@@ -31,9 +32,17 @@
 	} from 'vue'
 	import {
 		navData
-	} from '@/common/constant.js'
+	} from '@/common/js/constant.js'
 
 	const showLeft = ref(null)
+
+	// 导航
+	const navClick = url => {
+		console.log(url)
+		uni.navigateTo({
+			url
+		})
+	}
 
 	// 打开抽屉
 	const showDrawer = () => {
@@ -45,6 +54,13 @@
 		showLeft.value.close();
 	}
 
+	// 登出
+	const quitLogin = () => {
+		uni.navigateTo({
+			url: '/pages/login/index'
+		})
+	}
+
 	onMounted(() => {
 		console.log(navData)
 	})
@@ -52,40 +68,67 @@
 
 <style lang="scss">
 	.nav-container {
-		.custom-bar {
-			.uni-navbar__content {
-				border: none;
-			}
-		}
-
 		.section {
-			padding: 12px;
 			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
 
 			.section-item {
 				display: flex;
-				width: 45%;
-				height: 88px;
+				align-items: center;
+				flex-direction: column;
+				justify-content: center;
 				color: #467699;
 				border-radius: 5px;
-				flex-direction: column;
-				margin-bottom: 12px;
 				background: #dee6f0;
-				align-items: center;
-				justify-content: center;
+				width: calc(33.33% - 8px);
 
-				&:nth-child(odd) {
-					margin-right: 12px;
+				&:nth-child(3n) {
+					margin-right: unset;
 				}
 
 				.icon {
 					width: 30px;
 					height: 28px;
-					margin-bottom: 8px;
 				}
 			}
+		}
+	}
+
+	.drawer-content {
+		display: flex;
+		width: 100%;
+		height: 100vh !important;
+		flex-direction: column;
+
+		.drawer-header {
+			display: flex;
+			width: 100%;
+			height: 135px;
+			color: #fff;
+			background: #2b638b;
+			flex-direction: column;
+			justify-content: center;
+
+			.logo {
+				width: 56px;
+				border-radius: 50%;
+			}
+		}
+
+		.drawer-section {
+			width: 100%;
+			height: calc(100vh - 135px);
+			background: #ecf1f9;
+		}
+
+		.quit-btn {
+			bottom: 32px;
+			font-weight: bold;
+			position: absolute;
+			align-self: center;
+			background: #cbddf0;
+			width: calc(100% - 24px);
 		}
 	}
 </style>
