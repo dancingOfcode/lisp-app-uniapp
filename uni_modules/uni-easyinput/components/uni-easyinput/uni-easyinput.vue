@@ -243,7 +243,7 @@
 				})
 			},
 			inputContentStyle() {
-				const focusColor = this.focusShow ? (this.styles.focusColor ? this.styles.focusColor : '#93989e') : this.styles.borderColor
+				const focusColor = this.focusShow ? '#93989e' : this.styles.borderColor
 				const borderColor = this.inputBorder && this.msg ? '#dd524d' : focusColor
 				return obj2strStyle({
 					'border-color': borderColor || '#e5e5e5',

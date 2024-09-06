@@ -76,6 +76,12 @@
 			"style": {
 				"navigationBarTitleText": "关于APP" // 标题
 			}
+		},
+		{
+			"path": "pages/appInfo/license/index",
+			"style": {
+				"navigationBarTitleText": "许可" // 标题
+			}
 		}
 	],
 	"globalStyle": {

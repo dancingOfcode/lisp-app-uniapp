@@ -1,3 +1,7 @@
+/*
+ *
+ *@navData  nav页面数据
+ */
 export const navData = [{
 		title: '叫空载具',
 		url: '/pages/emptyVehicle/index',
@@ -20,7 +24,7 @@ export const navData = [{
 	},
 	{
 		title: '物料搬送',
-		url:'/pages/transportMaterials/index',
+		url: '/pages/transportMaterials/index',
 		icon: "/static/icon/transport_materials.png"
 	},
 	{
@@ -39,3 +43,15 @@ export const navData = [{
 		icon: "/static/icon/unbind.png"
 	}
 ]
+
+/*
+ *
+ *@accountReg  密码正则
+ */
+export const accountReg = `^[a-zA-Z0-9_-]{4,16}$`
+
+/*
+ *
+ *@passwordReg 密码正则
+ */
+export const passwordReg = `^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{6,20}$`;

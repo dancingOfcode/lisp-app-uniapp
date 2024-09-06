@@ -1,6 +1,6 @@
 <template>
 	<view class="empty-vehicle pd-12">
-		empty-vehicle
+		<app-btn :styles="{color:'red'}" />
 	</view>
 </template>
 

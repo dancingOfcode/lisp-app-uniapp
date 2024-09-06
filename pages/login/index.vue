@@ -9,18 +9,18 @@
 				<view class="fz-26">弗迪电池</view>
 				<view>FinDreams Battery</view>
 			</view>
-			<uni-forms ref="loginForm" :rules="rules" :model="loginFormData">
+			<uni-forms ref="loginForm" :rules="rules" :model="loginFormData" validate-trigger="blur">
 				<uni-forms-item class="pb-12" label="" name="account">
-					<uni-easyinput v-model="loginFormData.account" :clearable="false" placeholder="账号"
-						prefixIcon="person" />
+					<uni-easyinput :clearable="false" placeholder="账号" prefixIcon="person"
+						v-model="loginFormData.account" />
 				</uni-forms-item>
 				<uni-forms-item class="pb-12" label="" name="password">
-					<uni-easyinput type="password" iconColor="red" v-model="loginFormData.password" placeholder="密码"
-						prefixIcon="locked" />
+					<uni-easyinput type="password" placeholder="密码" prefixIcon="locked"
+						v-model="loginFormData.password" />
 				</uni-forms-item>
 				<uni-forms-item class="pb-12" label="" name="remember">
-					<uni-data-checkbox v-model="loginFormData.remember" multiple :localdata="rememberText"
-						selectedColor="#2b638b" selectedTextColor="#595e64" />
+					<uni-data-checkbox multiple :localdata="rememberText" selectedColor="#2b638b"
+						selectedTextColor="#595e64" v-model="loginFormData.remember" />
 				</uni-forms-item>
 			</uni-forms>
 			<button class="sbumit-btn" type="primary" @click="submit">登录</button>
@@ -33,6 +33,11 @@
 		ref,
 		reactive
 	} from 'vue'
+	import {
+		accountReg,
+		passwordReg
+	} from '../../common/js/constant';
+
 	const rememberText = reactive([{
 		text: '记住密码',
 		value: 1
@@ -49,15 +54,25 @@
 	const rules = reactive({
 		account: {
 			rules: [{
-				required: true,
-				errorMessage: '账号不能为空'
-			}]
+					required: true,
+					errorMessage: '账号不能为空'
+				},
+				{
+					pattern:  accountReg,
+					errorMessage: '账号格式错误，支持4到16位，由（字母，数字，下划线，减号）组成 。'
+				}
+			]
 		},
 		password: {
 			rules: [{
-				required: true,
-				errorMessage: '密码不能为空'
-			}]
+					required: true,
+					errorMessage: '密码不能为空'
+				},
+				{
+					pattern: passwordReg,
+					errorMessage: '密码格式错误'
+				}
+			]
 		}
 	})
 
