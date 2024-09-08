@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-data-tree">
-		<view class="uni-data-tree-input" @click="handleInput">
+		<view class="uni-data-tree-input">
 			<slot :options="options" :data="inputSelected" :error="errorMessage">
 				<view class="input-value" :class="{'input-value-border': border}">
 					<text v-if="errorMessage" class="selected-area error-text">{{errorMessage}}</text>
@@ -16,12 +16,14 @@
 						</view>
 					</scroll-view>
 					<text v-else class="selected-area placeholder">{{placeholder}}</text>
-					<view v-if="clearIcon && !readonly && inputSelected.length" class="icon-clear"
-						@click.stop="clear">
+					<view v-if="clearIcon && !readonly && inputSelected.length" class="icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#c0c4cc" size="24"></uni-icons>
 					</view>
-					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly ">
+					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly" @click="handleInput">
 						<view class="input-arrow"></view>
+					</view>
+					<view class="ml-12" v-if="scanIcon">
+						<uni-icons type="scan" size="30" @click="scanClick"></uni-icons>
 					</view>
 				</view>
 			</slot>
@@ -73,10 +75,11 @@
 	 * @property {String|JQLString} where 查询条件
 	 * @event {Function} popupshow 弹出的选择窗口打开时触发此事件
 	 * @event {Function} popuphide 弹出的选择窗口关闭时触发此事件
+	 * @event {Function} scanClick 点击扫码图标时候触发此事件
 	 */
 	export default {
 		name: 'UniDataPicker',
-		emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue'],
+		emits: ['popupopened', 'popupclosed', 'nodeclick', 'input', 'change', 'update:modelValue', 'scanClick'],
 		mixins: [dataPicker],
 		components: {
 			DataPickerView
@@ -119,6 +122,10 @@
 			ellipsis: {
 				type: Boolean,
 				default: true
+			},
+			scanIcon: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -289,12 +296,15 @@
 						value: selected
 					}
 				})
+			},
+			scanClick() {
+				this.$emit('scanClick')
 			}
 		}
 	}
 </script>
 
-<style >
+<style>
 	.uni-data-tree {
 		flex: 1;
 		position: relative;
@@ -362,7 +372,7 @@
 		white-space: nowrap;
 		/* #endif */
 	}
-	
+
 	.text-color {
 		color: #333;
 	}
@@ -485,7 +495,7 @@
 		flex: 1;
 		overflow: hidden;
 	}
-	
+
 	.icon-clear {
 		display: flex;
 		align-items: center;
@@ -550,5 +560,6 @@
 		border-top-width: 0;
 		border-bottom-color: #fff;
 	}
+
 	/* #endif */
-	</style>
+</style>

@@ -5,7 +5,7 @@
 		</view>
 		<view class="login-form">
 			<view class="header mb-16">
-				<image class="logo" src="/static/image/logo.jpg"></image>
+				<app-logo />
 				<view class="fz-26">弗迪电池</view>
 				<view>FinDreams Battery</view>
 			</view>
@@ -58,7 +58,7 @@
 					errorMessage: '账号不能为空'
 				},
 				{
-					pattern:  accountReg,
+					pattern: accountReg,
 					errorMessage: '账号格式错误，支持4到16位，由（字母，数字，下划线，减号）组成 。'
 				}
 			]

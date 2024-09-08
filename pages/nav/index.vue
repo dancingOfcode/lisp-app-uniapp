@@ -12,13 +12,13 @@
 	<uni-drawer ref="showLeft" mode="left" :width="300">
 		<view class="drawer-content">
 			<view class="drawer-header pd-16">
-				<image class="logo" src="/static/image/logo.jpg"></image>
+				<app-logo width="56" height="56" borderRadius="50%" />
 				<view class="mt-12 mb-8 fz-16">超级管理员</view>
 				<view class="fz-14">7857950</view>
 			</view>
 			<view class="drawer-section pd-16">
 				<view class="fz-18 mb-16" @click="navClick('/pages/userInfo/index')">个人信息</view>
-				<view class="fz-18"  @click="navClick('/pages/appInfo/index')">关于APP</view>
+				<view class="fz-18" @click="navClick('/pages/appInfo/index')">关于APP</view>
 			</view>
 			<button class="quit-btn" @click="quitLogin">退出登录</button>
 		</view>
@@ -109,11 +109,6 @@
 			background: #2b638b;
 			flex-direction: column;
 			justify-content: center;
-
-			.logo {
-				width: 56px;
-				border-radius: 50%;
-			}
 		}
 
 		.drawer-section {

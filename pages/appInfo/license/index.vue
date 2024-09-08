@@ -64,7 +64,7 @@
 <style lang="scss">
 	.license {
 		width: 100%;
-		height: calc(100vh - var(--status-bar-height));
+		height: calc(100vh - 44px);
 		overflow-y: auto;
 
 		.name {
