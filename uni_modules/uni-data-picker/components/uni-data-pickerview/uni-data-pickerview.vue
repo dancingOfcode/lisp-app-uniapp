@@ -243,8 +243,8 @@
 	}
 
 	.selected-item {
-		margin-left: 10px;
-		margin-right: 10px;
+		/* margin-left: 10px; */
+		/* margin-right: 10px; */
 		padding: 12px 0;
 		text-align: center;
 		/* #ifndef APP-NVUE */
@@ -265,7 +265,8 @@
 	}
 
 	.selected-item-active {
-		border-bottom: 2px solid #007aff;
+		color: #0052d9;
+		border-bottom: 2px solid #0052d9;
 	}
 
 	.selected-item-text {
@@ -319,7 +320,7 @@
 
 	.check {
 		margin-right: 5px;
-		border: 2px solid #007aff;
+		border: 2px solid #0052d9;
 		border-left: 0;
 		border-top: 0;
 		height: 12px;

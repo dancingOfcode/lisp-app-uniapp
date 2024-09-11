@@ -19,11 +19,12 @@
 					<view v-if="clearIcon && !readonly && inputSelected.length" class="icon-clear" @click.stop="clear">
 						<uni-icons type="clear" color="#c0c4cc" size="24"></uni-icons>
 					</view>
-					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly" @click="handleInput">
+					<view class="arrow-area" v-if="(!clearIcon || !inputSelected.length) && !readonly"
+						@click="handleInput">
 						<view class="input-arrow"></view>
 					</view>
 					<view class="ml-12" v-if="scanIcon">
-						<uni-icons type="scan" size="30" @click="scanClick"></uni-icons>
+						<uni-icons type="scan" size="32" @click="scanClick"></uni-icons>
 					</view>
 				</view>
 			</slot>
@@ -40,10 +41,11 @@
 					<view class="dialog-close-plus dialog-close-rotate" data-id="close"></view>
 				</view>
 			</view>
-			<data-picker-view class="picker-view" ref="pickerView" v-model="dataValue" :localdata="localdata"
-				:preload="preload" :collection="collection" :field="field" :orderby="orderby" :where="where"
-				:step-searh="stepSearh" :self-field="selfField" :parent-field="parentField" :managed-mode="true"
-				:map="map" :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange" @nodeclick="onnodeclick">
+			<data-picker-view style="display: unset" class="picker-view" ref="pickerView" v-model="dataValue"
+				:localdata="localdata" :preload="preload" :collection="collection" :field="field" :orderby="orderby"
+				:where="where" :step-searh="stepSearh" :self-field="selfField" :parent-field="parentField"
+				:managed-mode="true" :map="map" :ellipsis="ellipsis" @change="onchange" @datachange="ondatachange"
+				@nodeclick="onnodeclick">
 			</data-picker-view>
 		</view>
 	</view>
@@ -402,8 +404,8 @@
 	.input-arrow {
 		width: 7px;
 		height: 7px;
-		border-left: 1px solid #999;
-		border-bottom: 1px solid #999;
+		border-left: 1px solid #333;
+		border-bottom: 1px solid #333;
 	}
 
 	.uni-data-tree-cover {
@@ -423,7 +425,7 @@
 	.uni-data-tree-dialog {
 		position: fixed;
 		left: 0;
-		top: 20%;
+		top: 42%;
 		right: 0;
 		bottom: 0;
 		background-color: #FFFFFF;

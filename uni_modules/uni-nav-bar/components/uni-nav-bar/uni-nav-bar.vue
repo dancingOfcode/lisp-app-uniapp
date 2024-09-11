@@ -1,7 +1,8 @@
 <template>
 	<view class="uni-navbar" :class="{'uni-dark':dark, 'uni-nvue-fixed': fixed}">
-		<view class="uni-navbar__content" :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
-			:style="{ 'background-color': themeBgColor }" >
+		<view class="uni-navbar__content"
+			:class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }"
+			:style="{ 'background-color': themeBgColor }">
 			<status-bar v-if="statusBar" />
 			<view :style="{ color: themeColor,backgroundColor: themeBgColor ,height:navbarHeight}"
 				class="uni-navbar__header">
@@ -205,17 +206,15 @@
 		position: sticky;
 		/* #endif */
 	}
-	.uni-navbar {
-		// box-sizing: border-box;
-	}
 
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
-		font-size: 34rpx;
+		font-size: 16px;
 		font-weight: bold;
 		/* #endif */
 		/* #ifndef APP-PLUS */
-		font-size: 14px;
+		font-size: 16px;
+		font-weight: bold;
 		/* #endif */
 	}
 
@@ -225,13 +224,7 @@
 
 	.uni-navbar__content {
 		position: relative;
-		// background-color: #fff;
-		// box-sizing: border-box;
 		background-color: transparent;
-	}
-
-	.uni-navbar__content_view {
-		// box-sizing: border-box;
 	}
 
 	.uni-navbar-btn-text {
@@ -262,7 +255,6 @@
 		flex-wrap: nowrap;
 		flex-direction: row;
 		width: 120rpx;
-		// padding: 0 6px;
 		justify-content: center;
 		align-items: center;
 		/* #ifdef H5 */
@@ -284,8 +276,6 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		// width: 150rpx;
-		// padding-right: 30rpx;
 		justify-content: flex-end;
 		align-items: center;
 	}
@@ -309,9 +299,7 @@
 		justify-content: center;
 		font-size: 12px;
 		overflow: hidden;
-		// box-sizing: border-box;
 	}
-
 
 	.uni-navbar__placeholder-view {
 		height: $nav-height;
@@ -352,7 +340,4 @@
 		text-overflow: ellipsis;
 		/* #endif */
 	}
-
-	// 暗主题配置
-	.uni-dark {}
 </style>

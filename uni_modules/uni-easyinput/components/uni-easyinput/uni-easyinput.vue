@@ -22,8 +22,8 @@
 				</uni-icons>
 			</template>
 			<template v-else-if="suffixIcon">
-				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" color="#c0c4cc"
-					@click="onClickIcon('suffix')" size="22"></uni-icons>
+				<uni-icons v-if="suffixIcon" class="content-clear-icon" :type="suffixIcon" :color="suffixIconColor"
+					@click="onClickIcon('suffix')" :size="suffixIconSize"></uni-icons>
 			</template>
 			<template v-else>
 				<uni-icons v-if="clearable && isVal && !disabled  && type !== 'textarea'" class="content-clear-icon"
@@ -176,6 +176,14 @@
 			passwordIcon: {
 				type: Boolean,
 				default: true
+			},
+			suffixIconSize: {
+				type: Number,
+				default: 22
+			},
+			suffixIconColor: {
+				type: String,
+				default: '#c0c4cc'
 			},
 			styles: {
 				type: Object,

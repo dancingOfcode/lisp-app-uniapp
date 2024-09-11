@@ -20,7 +20,9 @@
 				<view class="fz-18 mb-16" @click="navClick('/pages/userInfo/index')">个人信息</view>
 				<view class="fz-18" @click="navClick('/pages/appInfo/index')">关于APP</view>
 			</view>
-			<button class="quit-btn" @click="quitLogin">退出登录</button>
+			<app-btn
+				:styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px', left:'12px', color:'#2d4556', background:'#cbddf0'}"
+				btnText="退出登录" @click="quitLogin" />
 		</view>
 	</uni-drawer>
 </template>
@@ -115,15 +117,6 @@
 			width: 100%;
 			height: calc(100vh - 135px);
 			background: #ecf1f9;
-		}
-
-		.quit-btn {
-			bottom: 32px;
-			font-weight: bold;
-			position: absolute;
-			align-self: center;
-			background: #cbddf0;
-			width: calc(100% - 24px);
 		}
 	}
 </style>

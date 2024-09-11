@@ -232,8 +232,10 @@
 	}
 
 	.uni-dialog-title-text {
-		font-size: 16px;
+		font-size: 20px;
 		font-weight: 500;
+		letter-spacing: 1px;
+		color: #333 !important;
 	}
 
 	.uni-dialog-content {

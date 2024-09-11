@@ -55,3 +55,84 @@ export const accountReg = `^[a-zA-Z0-9_-]{4,16}$`
  *@passwordReg 密码正则
  */
 export const passwordReg = `^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[._~!@#$^&*])[A-Za-z0-9._~!@#$^&*]{6,20}$`;
+
+export const platformTree = [{
+	text: "料车库",
+	value: "1",
+	children: [{
+			text: "料车库11",
+			value: "1-1",
+			children: [{
+					text: "料车库111",
+					value: "1-1-1"
+				},
+				{
+					text: "料车库112",
+					value: "1-1-2"
+				}
+			]
+		},
+		{
+			text: "料车库12",
+			value: "1-2",
+			children: [{
+					text: "料车库121",
+					value: "1-2-1"
+				},
+				{
+					text: "料车库122",
+					value: "1-2-2"
+				}
+			]
+		}
+	]
+}, {
+	text: "料箱库",
+	value: "2",
+	children: [{
+			text: "料箱库21",
+			value: "2-1",
+			children: [{
+					text: "料箱库211",
+					value: "2-1-1"
+				},
+				{
+					text: "料箱库212",
+					value: "2-1-2"
+				}
+			]
+		},
+		{
+			text: "料箱库22",
+			value: "2-2",
+			children: [{
+					text: "料箱库221",
+					value: "2-2-1"
+				},
+				{
+					text: "料箱库222",
+					value: "2-2-2"
+				}
+			]
+		}
+	]
+}]
+
+export const vehicleTree = [{
+	text: '料车',
+	value: 'a'
+}, {
+	text: '料箱',
+	value: 'b'
+}, {
+	text: '中转车',
+	value: 'c'
+}]
+
+export const transferCarTree = [{
+	text: '4格中转车',
+	value: 'a'
+}, {
+	text: '9格中转车',
+	value: 'b'
+}]

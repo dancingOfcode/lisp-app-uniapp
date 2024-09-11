@@ -2,7 +2,8 @@
 	<view class="app-select">
 		<uni-section :title="title">
 			<uni-data-picker :placeholder="placeholder" :popup-title="popupTitle" :localdata="dataSource"
-				:clear-icon="clearIcon" :scan-icon="scanIcon" @change="onchange" @scanClick="onScanClick">
+				v-model="vmStr" :clear-icon="clearIcon" :scan-icon="scanIcon" @change="onchange"
+				@scanClick="onScanClick">
 			</uni-data-picker>
 		</uni-section>
 	</view>
@@ -10,7 +11,8 @@
 
 <script setup>
 	import {
-		ref
+		ref,
+		defineExpose
 	} from 'vue'
 	// 数据流
 	const props = defineProps({
@@ -30,6 +32,10 @@
 			typeof: Array,
 			default: []
 		},
+		initial: {
+			type: String,
+			default: ''
+		},
 		clearIcon: {
 			type: Boolean,
 			default: true
@@ -39,6 +45,12 @@
 			default: false
 		}
 	})
+	const vmStr = ref(props.initial)
+
+	// 暴露属性
+	defineExpose({
+		vmStr
+	});
 
 	// 事件列表
 	const parentEvent = defineEmits(['change', 'scanClick'])
