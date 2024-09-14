@@ -5,7 +5,7 @@
 		<view class="footer">
 			<app-btn class="footer-btn" btnText="任务取消" @click="onSubmit('cancel')" />
 			<app-btn class="footer-btn" btnText="任务继续" @click="onSubmit('continue')" />
-			<app-btn class="footer-btn" btnText="人工完成" @click="onSubmit('artificial')" />
+			<app-btn class="footer-btn" btnText="人工完成" @click="onSubmit()" />
 		</view>
 	</view>
 </template>
@@ -14,6 +14,11 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		taskCancel,
+		taskContinue,
+		taskFinished
+	} from '@/common/js/api.js'
 
 	// 载具条码ref
 	const inputRef = ref(null)
@@ -25,7 +30,51 @@
 
 	// 提交
 	const onSubmit = type => {
-		console.log(type, inputRef.value.value)
+		if (!inputRef.value.value) {
+			return uni.showToast({
+				title: '请输入载具条码！'
+			})
+		}
+		let params = {
+			trayCode: inputRef.value.value
+		}
+		if (type === 'cancel') {
+			taskCancel(params).then(res => {
+				if (res.code === 200) {
+					uni.showToast({
+						title: res.message
+					})
+				} else {
+					uni.showToast({
+						title: res.message || '任务取消失败'
+					})
+				}
+			})
+		} else if (type === 'continue') {
+			taskContinue(params).then(res => {
+				if (res.code === 0) {
+					uni.showToast({
+						title: res.message
+					})
+				} else {
+					uni.showToast({
+						title: res.message || '任务继续失败'
+					})
+				}
+			})
+		} else {
+			taskContinue(params).then(res => {
+				if (res.code === 0) {
+					uni.showToast({
+						title: res.message
+					})
+				} else {
+					uni.showToast({
+						title: res.message || '人工完成失败'
+					})
+				}
+			})
+		}
 	}
 </script>
 

@@ -1,10 +1,10 @@
 <template>
 	<view class="app-info flex-h  pd-12 pt-42 fz-14">
 		<app-logo />
-		<view class="mt-12">版本号 1.0.3</view>
+		<view class="mt-12">版本号：{{packageInfo.appVersion}}</view>
 		<view class="introduction mt-12">
 			<view class="nowrap mr-8">应用介绍</view>
-			<view>这是一个PDA手持端应用，用于管理库存，包括货物入库、出库、盘点、叫料等操作。</view>
+			<view>{{packageInfo.appDescription}}</view>
 		</view>
 		<view class="nav-section mt-16 pd-12">
 			<view class="item">
@@ -20,7 +20,7 @@
 		<uni-popup ref="updateDialog">
 			<view class="update-content">
 				<uni-popup-dialog type="info" cancelText="暂不更新" confirmText="立即更新" title="提示"
-					content="检查到新版本 [v1.0.4], 是否更新？" @confirm="onUpdate"></uni-popup-dialog>
+					content="检查到新版本 [v1.0.1], 是否更新？" @confirm="onUpdate"></uni-popup-dialog>
 			</view>
 		</uni-popup>
 		<!-- 许可协议弹窗 -->
@@ -29,11 +29,11 @@
 				<view class="popup-header">
 					<app-logo width="50" height="50" />
 					<view class="ml-12">
-						<view class="title mb-8">郑州车灯</view>
-						<view>1.0.3</view>
+						<view class="title mb-8">{{packageInfo.appName}}</view>
+						<view>{{packageInfo.appVersion}}</view>
 					</view>
 				</view>
-				<view class="mt-12">应用介绍：这是一个PDA手持端应用，用于管理库存，包括货物入库、出库、盘点、叫料等操作。</view>
+				<view class="mt-12">{{packageInfo.appDescription}}</view>
 				<view class="footer">
 					<view @click="openLicense">查看许可</view>
 					<view class="ml-12" @click="closeDialog()">关闭</view>
@@ -47,10 +47,13 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		packageInfo
+	} from '@/common/js/constant.js'
 
 	const updateDialog = ref(null) // 更新ref
 	const licenseDialog = ref(null) // 协议ref
-	const isLatest = ref(false) // 是否最新版本
+	const isLatest = ref(true) // 是否最新版本
 
 	// 许可协议
 	const openDialog = type => {
@@ -59,7 +62,7 @@
 		} else {
 			if (isLatest.value) {
 				uni.showToast({
-					title: '当前为最新版本！'
+					title: '已是最新版本！'
 				})
 			} else {
 				updateDialog.value.open()

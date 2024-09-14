@@ -32,6 +32,9 @@
 	import {
 		passwordReg
 	} from '@/common/js/constant.js'
+	import {
+		updatePassword
+	} from '@/common/js/api.js'
 
 	// 绑定表单ref
 	const updateForm = ref(null)
@@ -116,6 +119,7 @@
 
 	// 提交表单
 	const submit = () => {
+		let info = uni.getStorageSync('STORAGE_user_info')
 		updateForm.value.validate().then(res => {
 			const {
 				oldPassword,
@@ -131,11 +135,25 @@
 					title: `确认密码与新密码不一样，请重新修改！`
 				})
 			} else {
-				uni.showToast({
-					title: `修改成功！`
+				let params = {
+					'username': info.username,
+					'oldpassword': oldPassword,
+					'password': newPassword,
+					'confirmpassword': confirmPassword
+				}
+				updatePassword(params).then(res => {
+					if (res.code === 200) {
+						uni.showToast({
+							title: res.message
+						})
+						// 返回上一页
+						uni.navigateBack();
+					} else {
+						uni.showToast({
+							title: res.message
+						})
+					}
 				})
-				// 返回上一页
-				uni.navigateBack();
 			}
 		}).catch(err => {
 			console.log('err', err);

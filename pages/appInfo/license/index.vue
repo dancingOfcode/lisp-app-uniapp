@@ -3,7 +3,7 @@
 		<view class="header flex-h mt-24">
 			<view class="mb-12 fz-16 bold">许可协议</view>
 			<app-logo width="42" height="42" />
-			<view class="version mt-12 mb-16">1.0.3</view>
+			<view class="version mt-12 mb-16">{{packageInfo.appVersion}}</view>
 			<view class="fz-14">Powered by uni-app</view>
 		</view>
 		<view class="list-content mt-24 fz-14">
@@ -16,6 +16,9 @@
 </template>
 
 <script setup>
+	import {
+		packageInfo
+	} from '@/common/js/constant';
 	const licenseList = [{
 		name: '_fe_analyzer_shared',
 		num: 1

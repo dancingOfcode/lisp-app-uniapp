@@ -9,8 +9,12 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		trayUnBind
+	} from '@/common/js/api.js'
 
 	const inputRef = ref(null)
+
 	// 载具条码
 	const onVehicleCode = () => {
 		console.log('onVehicleCode')
@@ -18,6 +22,25 @@
 
 	// 提交
 	const onSubmit = () => {
-		console.log('onSubmit', inputRef.value.value)
+		if (!inputRef.value.value) {
+			return uni.showToast({
+				title: '请输入载具条码！'
+			})
+		}
+		let params = {
+			trayCode: inputRef.value.value
+		}
+		console.log('onSubmit', params)
+		trayUnBind(params).then(res => {
+			if (res.code === 200) {
+				uni.showToast({
+					title: res.message
+				})
+			} else {
+				uni.showToast({
+					title: res.message || '解绑失败'
+				})
+			}
+		})
 	}
 </script>

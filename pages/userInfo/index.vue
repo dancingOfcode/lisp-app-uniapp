@@ -2,23 +2,23 @@
 	<view class="user-info pt-12 fz-14">
 		<view class="item pd-16">
 			<view class="left">姓名</view>
-			<view class="right">超级管理员</view>
+			<view class="right">{{userInfo.realname}}</view>
 		</view>
 		<view class="item pd-16">
 			<view class="left">手机号码</view>
-			<view class="right">18218650678</view>
+			<view class="right">{{userInfo.phone}}</view>
 		</view>
 		<view class="item pd-16">
 			<view class="left">工号</view>
-			<view class="right">123</view>
+			<view class="right">{{userInfo.workNo}}</view>
 		</view>
 		<view class="item pd-16">
 			<view class="left">账号 </view>
-			<view class="right">superadmin</view>
+			<view class="right">{{userInfo.username}}</view>
 		</view>
 		<view class="item pd-16">
 			<view class="left">部门</view>
-			<view class="right">第十三事业部第十三事业部第十三事业部第十三事业部第十三事业部第十三事业部</view>
+			<view class="right">{{userInfo.orgCodeTxt}}</view>
 		</view>
 		<button class="update-password mt-16 fz-18" @click="changePassword">
 			<image class="update-icon mr-8" src="/static/icon/updateIcon.png"></image>
@@ -28,9 +28,25 @@
 </template>
 
 <script setup>
-	const changePassword=()=>{
+	import {
+		ref,
+		onMounted
+	} from 'vue';
+	import {
+		isEmpty
+	} from '@/common/js/utils';
+
+	const userInfo = ref({})
+
+	onMounted(() => {
+		let info = uni.getStorageSync('STORAGE_user_info') || null
+		if (!isEmpty(info)) userInfo.value = info
+	})
+
+	// 修改密码
+	const changePassword = () => {
 		uni.navigateTo({
-			url:'updatePassword/index'
+			url: 'updatePassword/index'
 		})
 	}
 </script>

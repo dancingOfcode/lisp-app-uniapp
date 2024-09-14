@@ -13,8 +13,8 @@
 		<view class="drawer-content">
 			<view class="drawer-header pd-16">
 				<app-logo width="56" height="56" borderRadius="50%" />
-				<view class="mt-12 mb-8 fz-16">超级管理员</view>
-				<view class="fz-14">7857950</view>
+				<view class="mt-12 mb-8 fz-16">{{userInfo.realname}}</view>
+				<view class="fz-14">{{userInfo.workNo}}</view>
 			</view>
 			<view class="drawer-section pd-16">
 				<view class="fz-18 mb-16" @click="navClick('/pages/userInfo/index')">个人信息</view>
@@ -35,8 +35,15 @@
 	import {
 		navData
 	} from '@/common/js/constant.js'
+	import {
+		isEmpty
+	} from '@/common/js/utils.js'
+	import {
+		signOut
+	} from '@/common/js/api.js'
 
 	const showLeft = ref(null)
+	const userInfo = ref({})
 
 	// 导航
 	const navClick = url => {
@@ -58,13 +65,25 @@
 
 	// 登出
 	const quitLogin = () => {
-		uni.navigateTo({
-			url: '/pages/login/index'
+		signOut().then(res => {
+			if (res.code === 200) {
+				uni.showToast({
+					title: res.message
+				})
+				uni.navigateTo({
+					url: '/pages/login/index'
+				})
+			} else {
+				uni.showToast({
+					title: res.message || '登出失败！'
+				})
+			}
 		})
 	}
 
 	onMounted(() => {
-		console.log(navData)
+		let info = uni.getStorageSync('STORAGE_user_info') || null
+		if (!isEmpty(info)) userInfo.value = info
 	})
 </script>
 

@@ -9,6 +9,9 @@
 	import {
 		ref
 	} from 'vue'
+	import {
+		pickingUpGoods
+	} from '@/common/js/api.js'
 
 	const inputRef = ref(null)
 	// 料箱条码
@@ -18,7 +21,24 @@
 
 	// 提交
 	const onSubmit = () => {
-		console.log('onSubmit', inputRef.value.value)
+		if (!inputRef.value.value) {
+			return uni.showToast({
+				title: '请输入料箱条码'
+			})
+		}
+		pickingUpGoods({
+			trayCode: inputRef.value.value
+		}).then(res => {
+			if (res.code === 200) {
+				uni.showToast({
+					title: res.message
+				})
+			} else {
+				uni.showToast({
+					title: res.message || '料箱取货失败！'
+				})
+			}
+		})
 	}
 </script>
 

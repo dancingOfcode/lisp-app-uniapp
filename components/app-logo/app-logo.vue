@@ -1,6 +1,6 @@
 <template>
 	<view class="app-logo">
-		<image :style="styles" src="/static/image/logo.jpg" />
+		<image :style="styles" src="/static/image/logo.png" />
 	</view>
 </template>
 

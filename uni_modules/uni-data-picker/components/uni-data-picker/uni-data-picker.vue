@@ -425,7 +425,7 @@
 	.uni-data-tree-dialog {
 		position: fixed;
 		left: 0;
-		top: 42%;
+		top: 35%;
 		right: 0;
 		bottom: 0;
 		background-color: #FFFFFF;
