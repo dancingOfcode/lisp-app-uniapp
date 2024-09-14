@@ -5,14 +5,14 @@
 				<template v-for="(item,index) in selected">
 					<view class="selected-item"
 						:class="{'selected-item-active':index==selectedIndex, 'selected-item-text-overflow': ellipsis}"
-						 v-if="item.text" @click="handleSelect(index)">
+						v-if="item.text" @click="handleSelect(index)">
 						<text class="">{{item.text}}</text>
 					</view>
 				</template>
 			</view>
 		</scroll-view>
 		<view class="tab-c">
-			<template v-for="(child, i) in dataList" >
+			<template v-for="(child, i) in dataList">
 				<scroll-view class="list" :key="i" v-if="i==selectedIndex" :scroll-y="true">
 					<view class="item" :class="{'is-disabled': !!item.disable}" v-for="(item, j) in child"
 						@click="handleNodeClick(item, i, j)">
@@ -177,7 +177,7 @@
 		}
 	}
 </script>
-<style >
+<style>
 	.uni-data-pickerview {
 		flex: 1;
 		/* #ifndef APP-NVUE */
@@ -280,7 +280,9 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		max-height: 86%;
 	}
 
 	.list {
