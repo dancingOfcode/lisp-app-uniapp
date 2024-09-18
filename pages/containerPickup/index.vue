@@ -1,6 +1,6 @@
 <template>
 	<view class="container-pickup pd-12">
-		<app-input ref="inputRef" title="料箱条码" placeholder="请输入料箱条码" suffixIcon="scan" @iconClick="onPickupCode" />
+		<app-input ref="inputRef" title="料箱条码" placeholder="请输入料箱条码" suffixIcon="scan" />
 		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
 	</view>
 </template>
@@ -14,20 +14,16 @@
 	} from '@/common/js/api.js'
 
 	const inputRef = ref(null)
-	// 料箱条码
-	const onPickupCode = () => {
-		console.log('onPickupCode')
-	}
 
 	// 提交
 	const onSubmit = () => {
-		if (!inputRef.value.value) {
+		if (!inputRef.value.inputValue) {
 			return uni.showToast({
 				title: '请输入料箱条码'
 			})
 		}
 		pickingUpGoods({
-			trayCode: inputRef.value.value
+			trayCode: inputRef.value.inputValue
 		}).then(res => {
 			if (res.code === 200) {
 				uni.showToast({

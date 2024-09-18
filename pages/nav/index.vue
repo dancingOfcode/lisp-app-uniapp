@@ -47,7 +47,6 @@
 
 	// 导航
 	const navClick = url => {
-		console.log(url)
 		uni.navigateTo({
 			url
 		})

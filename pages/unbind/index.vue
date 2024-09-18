@@ -1,7 +1,7 @@
 <template>
 	<view class="unbind pd-12">
 		<app-input ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan" @iconClick="onVehicleCode" />
-		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
+		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" />
 	</view>
 </template>
 
@@ -15,22 +15,16 @@
 
 	const inputRef = ref(null)
 
-	// 载具条码
-	const onVehicleCode = () => {
-		console.log('onVehicleCode')
-	}
-
 	// 提交
 	const onSubmit = () => {
-		if (!inputRef.value.value) {
+		if (!inputRef.value.inputValue) {
 			return uni.showToast({
 				title: '请输入载具条码！'
 			})
 		}
 		let params = {
-			trayCode: inputRef.value.value
+			trayCode: inputRef.value.inputValue
 		}
-		console.log('onSubmit', params)
 		trayUnBind(params).then(res => {
 			if (res.code === 200) {
 				uni.showToast({

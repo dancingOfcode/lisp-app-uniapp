@@ -1,11 +1,10 @@
 <template>
 	<view class="transport-materials pd-12">
-		<app-input class="mb-16" ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan"
-			@iconClick="onVehicleCode" />
+		<app-input class="mb-16" ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan" />
 		<app-select ref="startRef" title="起点" placeholder="请选择起点位置" popupTitle="请选择起点位置" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" @scanClick="onStartScan" />
+			:clearIcon="false" scanIcon="true" />
 		<app-select ref="endRef" title="终点" placeholder="请选择终点位置" popupTitle="请选择终点位置" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" @scanClick="onEndScan" />
+			:clearIcon="false" scanIcon="true" />
 		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
 	</view>
 </template>
@@ -26,24 +25,9 @@
 	const endRef = ref(null)
 	const agvStationData = uni.getStorageSync('STORAGE_station_list')
 
-	// 载具扫码
-	const onVehicleCode = () => {
-		console.log('onVehicleCode')
-	}
-
-	// 起点站台扫码
-	const onStartScan = () => {
-		console.log('onStartScan')
-	}
-
-	// 终点站台扫码
-	const onEndScan = () => {
-		console.log('onEndScan')
-	}
-
 	// 提交
 	const onSubmit = () => {
-		if (!inputRef.value.value) {
+		if (!inputRef.value.inputValue) {
 			return uni.showToast({
 				title: '请输入载具条码！'
 			})
@@ -59,11 +43,10 @@
 			})
 		}
 		let params = {
-			"trayCode": inputRef.value.value,
+			"trayCode": inputRef.value.inputValue,
 			"endStationCode": endRef.value.vmStr,
 			"startStationCode": startRef.value.vmStr
 		}
-		console.log(params)
 		transportMaterials(params).then(res => {
 			if (res.code === 200) {
 				uni.showToast({

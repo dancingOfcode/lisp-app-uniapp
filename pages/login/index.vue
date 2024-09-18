@@ -7,7 +7,7 @@
 			<view class="header mb-16">
 				<app-logo />
 				<view class="fz-26">郑州车灯</view>
-				<view>FinDreams Battery</view>
+				<!-- <view>FinDreams Battery</view> -->
 			</view>
 			<uni-forms ref="loginForm" :rules="rules" :model="loginFormData" validate-trigger="blur">
 				<uni-forms-item class="pb-12" label="" name="username">

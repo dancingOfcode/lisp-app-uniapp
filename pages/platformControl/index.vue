@@ -1,8 +1,8 @@
 <template>
 	<view class="platform-control pd-12">
 		<app-select class="mb-16" title="叫料站台" placeholder="请选择叫料站台" popupTitle="请选择叫料站台" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" ref="platformRef" @scanClick="onPlatformScan" />
-		<app-input ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan" @iconClick="onVehiclecCode" />
+			:clearIcon="false" scanIcon="true" ref="platformRef" />
+		<app-input ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan"/>
 		<view class="footer">
 			<app-btn class="footer-btn" btnText="站台清空" @click="onSubmit('clear')" />
 			<app-btn class="footer-btn" btnText="站台占用" @click="onSubmit" />
@@ -25,16 +25,6 @@
 	const inputRef = ref(null)
 	const agvStationData = uni.getStorageSync('STORAGE_station_list')
 
-	// 站台扫码
-	const onPlatformScan = () => {
-		console.log('onPlatformScan')
-	}
-
-	// 载具条码
-	const onVehiclecCode = () => {
-		console.log('onVehiclecCode')
-	}
-
 	// 站台清空、占用
 	const onSubmit = type => {
 		if (!platformRef.value.vmStr) {
@@ -42,7 +32,7 @@
 				title: '请选择叫料站台'
 			})
 		}
-		if (!inputRef.value.value) {
+		if (!inputRef.value.inputValue) {
 			return uni.showToast({
 				title: '请输入载具条码'
 			})

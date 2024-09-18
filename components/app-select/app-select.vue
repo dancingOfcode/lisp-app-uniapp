@@ -2,8 +2,7 @@
 	<view class="app-select">
 		<uni-section :title="title">
 			<uni-data-picker :placeholder="placeholder" :popup-title="popupTitle" :localdata="dataSource"
-				v-model="vmStr" :clear-icon="clearIcon" :scan-icon="scanIcon" @change="onchange"
-				@scanClick="onScanClick">
+				v-model="vmStr" :clear-icon="clearIcon" :scan-icon="scanIcon" @scanClick="onScanClick">
 			</uni-data-picker>
 		</uni-section>
 	</view>
@@ -32,10 +31,6 @@
 			typeof: Array,
 			default: []
 		},
-		initial: {
-			type: String,
-			default: ''
-		},
 		clearIcon: {
 			type: Boolean,
 			default: true
@@ -45,23 +40,22 @@
 			default: false
 		}
 	})
-	const vmStr = ref(props.initial)
+	const vmStr = ref('')
 
 	// 暴露属性
 	defineExpose({
 		vmStr
 	});
 
-	// 事件列表
-	const parentEvent = defineEmits(['change', 'scanClick'])
-
-	// 下拉选择
-	const onchange = (e) => {
-		parentEvent('change', e)
-	}
-
 	// 点击扫码
 	const onScanClick = () => {
-		parentEvent('scanClick')
-	}
+		// 允许从相机和相册扫码
+		uni.scanCode({
+			success: function(res) {
+				if (res.result) {
+					vmStr.value = res.result;
+				};
+			}
+		});
+	};
 </script>
