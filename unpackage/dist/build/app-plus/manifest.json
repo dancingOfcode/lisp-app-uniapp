@@ -5,18 +5,20 @@
     "iPad"
   ],
   "id": "__UNI__04DE108",
-  "name": "uni-forms 表单示例",
+  "name": "郑州车灯",
   "version": {
-    "name": "1.0.0",
+    "name": "1.0.1",
     "code": "100"
   },
-  "description": "",
+  "description": "这是一个PDA手持端应用，用于管理库存，包括货物入库、出库、盘点、叫料等操作。",
   "developer": {
     "name": "",
     "email": "",
     "url": ""
   },
   "permissions": {
+    "Barcode": {},
+    "Camera": {},
     "UniNView": {
       "description": "UniNView原生渲染"
     }
@@ -126,5 +128,6 @@
       }
     }
   },
+  "locale": "zh-Hans",
   "launch_path": "__uniappview.html"
 }

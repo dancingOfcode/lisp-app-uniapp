@@ -10,8 +10,13 @@
 <script setup>
 	import {
 		ref,
+		onMounted,
+		onUnmounted,
 		defineExpose
-	} from 'vue';
+	} from 'vue'
+	import {
+		androidScan
+	} from '@/common/js/androidScan.js'
 
 	const inputValue = ref(null);
 	// 数据流
@@ -47,15 +52,33 @@
 		inputValue
 	});
 
+	onMounted(() => {
+		// #ifdef APP-PLUS
+		// 扫描时候会将数据传入此方法里
+		androidScan.init(getScanCode);
+		// 开始广播监听
+		androidScan.start();
+		// #endif
+	})
+
+	onUnmounted(() => {
+		// #ifdef APP-PLUS
+		// 停止广播监听
+		androidScan.stop();
+		// #endif
+	})
+
+	// 扫码成功回调
+	const getScanCode = code => {
+		if (!code) return
+		inputValue.value = code
+	}
+
 	// 点击扫码
 	const onIconClick = () => {
-		// 允许从相机和相册扫码
-		uni.scanCode({
-			success: function(res) {
-				if (res.result) {
-					inputValue.value = res.result;
-				};
-			}
-		});
+		// #ifdef APP-PLUS
+		// ANDROID激光扫码
+		androidScan.triggerScan();
+		// #endif
 	};
 </script>
