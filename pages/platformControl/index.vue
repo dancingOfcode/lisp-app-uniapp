@@ -1,8 +1,8 @@
 <template>
 	<view class="platform-control pd-12">
 		<app-select class="mb-16" title="叫料站台" placeholder="请选择叫料站台" popupTitle="请选择叫料站台" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" ref="platformRef" />
-		<app-input ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan"/>
+			:clearIcon="false" :scanIcon="true" ref="platformRef" />
+		<app-input ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan" />
 		<view class="footer">
 			<app-btn class="footer-btn" btnText="站台清空" @click="onSubmit('clear')" />
 			<app-btn class="footer-btn" btnText="站台占用" @click="onSubmit" />
@@ -47,6 +47,9 @@
 					uni.showToast({
 						title: res.message
 					})
+					uni.navigateTo({
+						url: '/pages/nav/index'
+					});
 				} else {
 					uni.showToast({
 						title: res.message || '站台清空失败！'

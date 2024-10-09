@@ -30,6 +30,9 @@
 				uni.showToast({
 					title: res.message
 				})
+				uni.navigateTo({
+					url: '/pages/nav/index'
+				});
 			} else {
 				uni.showToast({
 					title: res.message || '解绑失败'

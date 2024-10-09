@@ -5,7 +5,7 @@ let broadcastReceiver; // 广播接收器
 let repeatFlag = false;
 
 // 初始化定义广播
-const init = (onReceiveCallback) => {
+const initScan = (onReceiveCallback) => {
 	// 获取activity
 	mainActivity = plus.android.runtimeMainActivity();
 	// 导入类
@@ -13,13 +13,13 @@ const init = (onReceiveCallback) => {
 	//实例化一个意图过滤器
 	intentFilter = new IntentFilter();
 	// addAction添加动作, com.dwexample.ACTION为设备配置的广播名称
-	intentFilter.addAction("com.dwexample.ACTION");
+	intentFilter.addAction("com.fdbatt.ilsp_app.SCAN_EVENT");
 	// BroadcastReceiver: 广播接收器接口:implements 实现接口  onReceive实现接口的方法
 	broadcastReceiver = plus.android.implements('io.dcloud.feature.internal.reflect.BroadcastReceiver', {
 		onReceive: function(context, intent) {
 			plus.android.importClass(intent);
 			// 扫描设置的开发者选项--手持机pda的广播键值 com.motorolasolutions.emdk.datawedge.data_string
-			const code = intent.getStringExtra("com.motorolasolutions.emdk.datawedge.data_string");
+			const code = intent.getStringExtra("com.symbol.datawedge.data_string");
 			//防重复
 			if (repeatFlag) return;
 			repeatFlag = true;
@@ -33,12 +33,12 @@ const init = (onReceiveCallback) => {
 }
 
 // 开始广播监听扫码
-const start = () => {
+const startScan = () => {
 	mainActivity.registerReceiver(broadcastReceiver, intentFilter);
 }
 
 // 停止广播监听扫码
-const stop = () => {
+const stopScan = () => {
 	mainActivity.unregisterReceiver(broadcastReceiver);
 }
 
@@ -50,14 +50,14 @@ const triggerScan = () => {
 	let intent = new Intent();
 	// 定义意图，由厂商提供(此处设置为斑马PDA)
 	intent.setAction("com.symbol.datawedge.api.ACTION");
-	intent.putExtra("com.symbol.datawedge.api.ENABLE_DATAWEDGE", true);  
+	intent.putExtra("com.symbol.datawedge.api.CREATE_PROFILE", "ILSP app profile");
 	// 广播这个意图
 	mainActivity.sendBroadcast(intent);
 }
 
 export const androidScan = {
-	init,
-	start,
-	stop,
+	initScan,
+	startScan,
+	stopScan,
 	triggerScan
 };

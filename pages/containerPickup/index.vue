@@ -29,6 +29,9 @@
 				uni.showToast({
 					title: res.message
 				})
+				uni.navigateTo({
+					url: '/pages/nav/index'
+				});
 			} else {
 				uni.showToast({
 					title: res.message || '料箱取货失败！'

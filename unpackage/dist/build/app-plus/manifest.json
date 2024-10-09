@@ -107,6 +107,10 @@
         }
       }
     },
+    "uniStatistics": {
+      "enable": false,
+      "debug": true
+    },
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "dark",
@@ -116,7 +120,7 @@
     "uni-app": {
       "control": "uni-v3",
       "vueVersion": "3",
-      "compilerVersion": "4.24",
+      "compilerVersion": "4.29",
       "nvueCompiler": "uni-app",
       "renderer": "auto",
       "nvue": {

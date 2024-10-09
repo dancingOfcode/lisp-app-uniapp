@@ -82,6 +82,18 @@
 			"style": {
 				"navigationBarTitleText": "许可" // 标题
 			}
+		},
+		{
+			"path": "pages/testPage/index",
+			"style": {
+				"navigationBarTitleText": "扫码功能测试" // 标题
+			}
+		},
+		{
+			"path": "pages/testPageTwo/index",
+			"style": {
+				"navigationBarTitleText": "扫码测试page2" // 标题
+			}
 		}
 	],
 	"globalStyle": {

@@ -4,7 +4,7 @@
 		<app-select class="mb-16" ref="transferCaref" title="中转车类型" placeholder="请选择中转车类型" popupTitle="请选择中转车类型"
 			:dataSource="transferCarTree" :clearIcon="false" />
 		<app-select ref="platformRef" title="站台编码" placeholder="请选择站台编码" popupTitle="请选择站台编码"
-			:dataSource="agvStationData" :clearIcon="false" scanIcon="true" />
+			:dataSource="agvStationData" :clearIcon="false" :scanIcon="true" />
 		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
 	</view>
 </template>
@@ -23,7 +23,7 @@
 	const transferCaref = ref(null)
 	// 站台下拉子组件ref
 	const platformRef = ref(null)
-	const transferCarTree = uni.getStorageSync('STORAGE_sys_dict').transfer_car_type.filter(item => item.label !== "料箱")
+	const transferCarTree = uni.getStorageSync('STORAGE_sys_dict').transfer_car_type?.filter(item => item.label !== "料箱")
 	const agvStationData = uni.getStorageSync('STORAGE_station_list')
 
 	// 提交
@@ -53,6 +53,9 @@
 				uni.showToast({
 					title: res.message
 				})
+				uni.navigateTo({
+					url: '/pages/nav/index'
+				});
 			} else {
 				uni.showToast({
 					title: res.message || "中转回库失败！"

@@ -1,7 +1,7 @@
 <template>
 	<view class="empty-vehicle pd-12">
 		<app-select class="mb-16" ref="platformRef" title="叫料站台" placeholder="请选择叫料站台" popupTitle="请选择叫料站台"
-			:dataSource="agvStationData" :clearIcon="false" scanIcon="true" />
+			:dataSource="agvStationData" :clearIcon="false" :scanIcon="true" />
 		<app-select title="载具类型" ref="vehicleRef" placeholder="请选择载具类型" popupTitle="请选择载具类型" :dataSource="vehicleData"
 			:clearIcon="false" />
 		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
@@ -23,10 +23,13 @@
 	const vehicleRef = ref(null)
 	const avgData = ref([])
 	const agvStationData = uni.getStorageSync('STORAGE_station_list')
-	const vehicleData = uni.getStorageSync('STORAGE_sys_dict').tray_type.filter(item => item.label !== "料箱")
+	const vehicleData = uni.getStorageSync('STORAGE_sys_dict').tray_type?.filter(item => item.label !== "料箱")
 
 	// 提交
 	const onSubmit = () => {
+		uni.navigateTo({
+			url: '/pages/nav/index'
+		});
 		if (!platformRef.value.vmStr) {
 			return uni.showToast({
 				title: '请选择叫料站台'
@@ -46,6 +49,9 @@
 				uni.showToast({
 					title: res.message
 				})
+				uni.navigateTo({
+					url: '/pages/nav/index'
+				});
 			} else {
 				uni.showToast({
 					title: res.message || '叫空载具失败！'

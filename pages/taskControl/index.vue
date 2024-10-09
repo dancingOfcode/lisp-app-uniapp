@@ -38,6 +38,9 @@
 					uni.showToast({
 						title: res.message
 					})
+					uni.navigateTo({
+						url: '/pages/nav/index'
+					});
 				} else {
 					uni.showToast({
 						title: res.message || '任务取消失败'

@@ -41,7 +41,17 @@ export const navData = [{
 		title: '解除绑定',
 		url: '/pages/unbind/index',
 		icon: "/static/icon/unbind.png"
-	}
+	},
+	{
+		title: '扫码测试',
+		url: '/pages/testPage/index',
+		icon: "/static/icon/transfer_warehouse.png"
+	},
+	{
+		title: '测试page2',
+		url: '/pages/testPageTwo/index',
+		icon: "/static/icon/transfer_warehouse.png"
+	},
 ]
 
 /*

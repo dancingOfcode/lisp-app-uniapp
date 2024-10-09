@@ -2,23 +2,34 @@
 	<view class="app-select">
 		<uni-section :title="title">
 			<uni-data-picker :placeholder="placeholder" :popup-title="popupTitle" :localdata="dataSource"
-				v-model="vmStr" :clear-icon="clearIcon" :scan-icon="scanIcon" @scanClick="onScanClick">
+				v-model="vmStr" :clear-icon="clearIcon" :scan-icon="scanIcon" @scanClick="onIconClick">
 			</uni-data-picker>
 		</uni-section>
+		<input v-if="scanIcon && !isTest && !isTest2" class="scan-input" v-model="scanValue" />
 	</view>
 </template>
 
 <script setup>
 	import {
 		ref,
-		onMounted,
-		onUnmounted,
+		watch,
 		defineExpose
 	} from 'vue'
 	import {
 		androidScan
 	} from '@/common/js/androidScan.js'
+	import {
+		androidScan2
+	} from '@/common/js/scan.js'
+	import {
+		onLoad,
+		onHide,
+		onShow,
+		onUnload
+	} from '@dcloudio/uni-app'
 
+	const vmStr = ref('')
+	const scanValue = ref('');
 	// 数据流
 	const props = defineProps({
 		title: {
@@ -44,42 +55,80 @@
 		scanIcon: {
 			type: Boolean,
 			default: false
-		}
+		},
+		isTest: {
+			type: Boolean,
+			default: false
+		},
+		isTest2: {
+			type: Boolean,
+			default: false
+		},
 	})
-	const vmStr = ref('')
 
 	// 暴露属性
 	defineExpose({
 		vmStr
 	});
 
-	onMounted(() => {
-		// #ifdef APP-PLUS
-		// 扫描时候会将数据传入此方法里
-		androidScan.init(getScanCode);
-		// 开始广播监听
-		androidScan.start();
-		// #endif
-	})
+	// 监听并同步扫描值
+	watch(
+		() => scanValue.value,
+		(count, prevCount) => {
+			vmStr.value = count
+		}
+	)
 
-	onUnmounted(() => {
-		// #ifdef APP-PLUS
+	onHide(() => {
 		// 停止广播监听
-		androidScan.stop();
-		// #endif
+		if (props.isTest) androidScan.stopScan();
+		if (props.isTest2) androidScan2.stopScan();
 	})
 
-	// 扫码成功回调
-	const getScanCode = code => {
-		if (!code) return
-		vmStr.value = code
-	}
+	onUnload(() => {
+		// 停止广播监听
+		if (props.isTest) androidScan.stopScan();
+		if (props.isTest2) androidScan2.stopScan();
+	})
 
 	// 点击扫码
-	const onScanClick = () => {
-		// #ifdef APP-PLUS
-		// ANDROID激光扫码
-		androidScan.triggerScan();
-		// #endif
+	const onIconClick = () => {
+		if (props.isTest) {
+			// 开启激光红外线扫描
+			androidScan.triggerScan()
+			// 初始化
+			androidScan.initScan((code) => {
+				// code为扫码取得的值
+				if (!code) return
+				vmStr.value = code
+			});
+			// 开始扫描
+			androidScan.startScan();
+		}
+		if (props.isTest2) {
+			// 初始化
+			androidScan2.initScan((code) => {
+				// code为扫码取得的值
+				if (!code) return
+				vmStr.value = code
+			});
+			// 开始扫描
+			androidScan2.startScan();
+		}
 	};
 </script>
+
+<style lang="scss">
+	.app-select {
+		position: relative;
+
+		.scan-input {
+			top: 50px;
+			right: 10px;
+			position: absolute;
+			width: 24px;
+			height: 24px;
+			opacity: 0;
+		}
+	}
+</style>

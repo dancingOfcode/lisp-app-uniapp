@@ -2,9 +2,9 @@
 	<view class="transport-materials pd-12">
 		<app-input class="mb-16" ref="inputRef" title="载具条码" placeholder="请输入载具条码" suffixIcon="scan" />
 		<app-select ref="startRef" title="起点" placeholder="请选择起点位置" popupTitle="请选择起点位置" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" />
+			:clearIcon="false" :scanIcon="true" />
 		<app-select ref="endRef" title="终点" placeholder="请选择终点位置" popupTitle="请选择终点位置" :dataSource="agvStationData"
-			:clearIcon="false" scanIcon="true" />
+			:clearIcon="false" :scanIcon="true" />
 		<app-btn :styles="{position: 'absolute', width: `calc(100% - 24px)`, bottom:'24px'}" @click="onSubmit" />
 	</view>
 </template>
@@ -52,6 +52,9 @@
 				uni.showToast({
 					title: res.message
 				})
+				uni.navigateTo({
+					url: '/pages/nav/index'
+				});
 			} else {
 				uni.showToast({
 					title: res.message || '物流搬送失败！'
